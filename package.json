@@ -1,0 +1,29 @@
+{
+  "name": "noderecipes",
+  "version": "1.0.0",
+  "description": "Recipe Project using Node",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Manteliz/NodeRecipes.git"
+  },
+  "author": "Mantas Vaistaras",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Manteliz/NodeRecipes/issues"
+  },
+  "homepage": "https://github.com/Manteliz/NodeRecipes#readme",
+  "devDependencies": {
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
