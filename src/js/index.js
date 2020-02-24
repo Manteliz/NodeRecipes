@@ -1,4 +1,6 @@
 import Search from './models/Search';
+import * as searchView from './views/searchView';
+import {elements} from './views/base'; 
 
 /** Global state of the app
  * - Search object
@@ -11,16 +13,22 @@ const state = {};
 
 const controlSearch = async () => {
 
-    const query = 'pizza';
+    const query = searchView.getInput();
 
     if (query) {
         state.search = new Search(query);
         await state.search.getResults();
-        console.log(state.search.result);
+
+        //Render UI
+        searchView.clearSearchField();
+        searchView.clearResultsList();
+        searchView.displayResults(state.search.result);
     }
 }
 
-document.querySelector('.search').addEventListener('submit', e => {
+elements.searchForm.addEventListener('submit', e => {
+    //TODO pressing RETURN key throws error but everything works anyways
     e.preventDefault();
+    //TODO loading spinner
     controlSearch();
 });
