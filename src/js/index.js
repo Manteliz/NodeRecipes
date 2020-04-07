@@ -1,4 +1,5 @@
 import Search from './models/Search';
+import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
 import {elements, renderLoader, clearLoader} from './views/base'; 
 
@@ -10,6 +11,8 @@ import {elements, renderLoader, clearLoader} from './views/base';
  */
 
 const state = {};
+
+/*Search Controller*/
 
 const controlSearch = async () => {
 
@@ -33,3 +36,34 @@ elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
 });
+
+elements.resultsPages.addEventListener('click', e => {
+    const button = e.target.closest('.btn-inline');
+    if(button){
+        searchView.clearResultsPageButtons();
+        searchView.clearResultsList();
+        searchView.displayResults(state.search.result, parseInt(button.dataset.goto));
+    }
+
+});
+
+/* Recipe Controller */
+
+const controlRecipe = async () => {
+
+    //TESTING
+    //const id = window.location.hash.replace('#' , '');
+    const id = '46956';
+
+    if (id) {
+        state.recipe = new Recipe(id);
+        await state.recipe.getRecipe();
+        console.log(state.recipe.ingredients);
+        state.recipe.parseIngredients();
+        console.log(state.recipe.ingredients);
+    }
+    
+}
+
+['hashchange', 'load'].forEach(event => window.addEventListener(event , controlRecipe));
+

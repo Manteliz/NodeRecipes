@@ -11,7 +11,7 @@ export const renderLoader = parent => {
         <div class ="loader"> 
             <svg>
                 <use href="img/icons.svg#icon-cw"></use>
-            </svg>
+            </svg> 
         </div>
     `
 
@@ -24,3 +24,4 @@ export const clearLoader = () => {
         loader.parentElement.removeChild(loader);
     }
 }
+
