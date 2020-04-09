@@ -20,6 +20,31 @@ export default class Recipe{
         }
     }
 
+    calcTime(){
+        // Assuming that we need 15 min for each 3 ingredients
+        const numIng = this.ingredients.length;
+        const periods = Math.ceil(numIng / 3);
+        this.time = periods * 15;
+    }
+
+    calcServings(){
+        this.servings = 4;
+    }
+
+    updateServings(type){
+        // Servings
+        const newServings = type === 'dec' ? this.servings = this.servings - 1 : this.servings + 1;
+        console.log(newServings);
+        //Error @12th servings id=#47746
+
+        // Ingredients
+        this.ingredients.forEach(ing => {
+            ing.count *= (newServings / this.servings);
+        });
+
+        this.servings = newServings;
+    }
+
     parseIngredients(){
         //For testing - recipe which has ingredients hard to parse is #36453
         const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
