@@ -93,9 +93,8 @@ export const renderRecipe = recipe => {
 
 export const updateServingsIngredients = recipe => {
     // Update servings
-    clearRecipe();
-    renderRecipe(recipe);
+    document.querySelector('.recipe__info-data--people').innerHTML = recipe.servings;
 
     // Update ingredeints
-
+    document.querySelectorAll('.recipe__count').forEach( (el, i) => el.innerHTML = new Fraction(recipe.ingredients[i].count).toString() );
 };
