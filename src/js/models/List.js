@@ -19,4 +19,8 @@ export default class List{
         const i = this.items.findIndex( el => id === el.id );
         this.items.splice(i, 1);
     }
+
+    updateCount(id, newCount) {
+        this.items.find(el => el.id === id).count = newCount;
+    }
 }

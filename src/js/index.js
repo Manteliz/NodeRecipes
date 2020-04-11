@@ -14,7 +14,9 @@ import List from './models/List';
 
 const state = {};
 
-/*Search Controller*/
+/**
+ * Search Controller
+*/
 
 const controlSearch = async () => {
 
@@ -49,7 +51,9 @@ elements.resultsPages.addEventListener('click', e => {
 
 });
 
-/* Recipe Controller */
+/**
+ *  Recipe Controller
+*/
 
 const controlRecipe = async () => {
 
@@ -89,8 +93,18 @@ elements.recipe.addEventListener('click', e => {
         // increase servings button has been clicked
         state.recipe.updateServings('inc');
         recipeView.updateServingsIngredients(state.recipe);
+    } else if(e.target.matches('.recipe__btn--add, .recipe__btn--add *')){
+        //Add to shopping list button has been clicked
+        controlList();
     }
 });
 
-//TESTING
-window.l = new List();
+/**
+ * LIST CONTROLLER
+*/
+
+const controlList = () => {
+    if(!state.list) state.list = new List();
+    state.recipe.ingredients.forEach( el => state.list.addItem(el.count, el.unit, el.ingredient));
+    console.log(state.list);
+};
