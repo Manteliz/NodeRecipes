@@ -1,9 +1,10 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
+import List from './models/List';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
+import * as listView from './views/listView';
 import {elements, renderLoader, clearLoader} from './views/base'; 
-import List from './models/List';
 
 /** Global state of the app
  * - Search object
@@ -105,6 +106,22 @@ elements.recipe.addEventListener('click', e => {
 
 const controlList = () => {
     if(!state.list) state.list = new List();
-    state.recipe.ingredients.forEach( el => state.list.addItem(el.count, el.unit, el.ingredient));
-    console.log(state.list);
+    state.recipe.ingredients.forEach( el => {
+        const item = state.list.addItem(el.count, el.unit, el.ingredient);
+        listView.renderItem(item);
+    });
+    
 };
+
+// Handle delete and update list item events
+elements.list.addEventListener('click', e => {
+    const id = e.target.closest('.shopping__item').dataset.itemid;
+    if(e.target.matches('.shopping__delete, .shopping__delete *')){
+        state.list.deleteItem(id);
+        listView.deleteItem(id);
+    } else if(e.target.matches('.shopping__count-value')){
+        const val = parseFloat(e.target.value, 10);
+        state.list.updateCount(id, val);
+    }
+
+});
