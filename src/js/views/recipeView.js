@@ -10,13 +10,13 @@ const createIngredient = ingredient => `
         <svg class="recipe__icon">
             <use href="img/icons.svg#icon-check"></use>
         </svg>
-        <div class="recipe__count">${new Fraction(ingredient.count).toString()}</div>
+        <div class="recipe__count">${new Fraction(Math.round(ingredient.count*10000)/10000).toString()}</div>
         <div class="recipe__ingredient">
             <span class="recipe__unit">${ingredient.unit}</span>
             ${ingredient.ingredient}
         </div>
     </li>
-`;
+    `;
 
 export const renderRecipe = recipe => {
     const markup = `
@@ -96,5 +96,5 @@ export const updateServingsIngredients = recipe => {
     document.querySelector('.recipe__info-data--people').innerHTML = recipe.servings;
 
     // Update ingredeints
-    document.querySelectorAll('.recipe__count').forEach( (el, i) => el.innerHTML = new Fraction(recipe.ingredients[i].count).toString() );
+    document.querySelectorAll('.recipe__count').forEach( (el, i) => el.innerHTML = new Fraction(Math.round(recipe.ingredients[i].count*10000)/10000).toString() );
 };
